@@ -34,6 +34,11 @@ export interface QuizAnswers {
   [questionId: string]: string[];
 }
 
+export interface SubmissionInput {
+  userInfo: UserInfo;
+  answers: QuizAnswers;
+}
+
 export type RecommendationLevel = 
   | 'no_risk'
   | 'attention'

@@ -1,0 +1,107 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - paragraph [ref=e7]: Центр развития особенных детей
+        - paragraph [ref=e8]: Спокойная помощь родителям и понятный маршрут для ребёнка
+      - generic [ref=e9]:
+        - button "О центре" [ref=e10] [cursor=pointer]
+        - button "Админ-панель" [ref=e11] [cursor=pointer]
+    - generic [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - img [ref=e15]
+          - text: Онлайн-скрининг развития
+        - heading "Главная страница центра, где родителю сразу понятно, что делать дальше" [level=1] [ref=e17]
+        - paragraph [ref=e18]: Мы помогаем семьям спокойно оценить раннее развитие ребёнка, увидеть возможные сигналы и вовремя обратиться за консультацией. Без резких формулировок, без перегруза, с понятным следующим шагом.
+        - generic [ref=e19]:
+          - generic [ref=e20]: Бережный формат
+          - generic [ref=e21]: Онлайн-тест за 5-7 минут
+          - generic [ref=e22]: Результат сразу
+        - generic [ref=e23]:
+          - button "Пройти тест" [ref=e24] [cursor=pointer]:
+            - text: Пройти тест
+            - img
+          - button "Позвонить в центр" [ref=e25] [cursor=pointer]
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - img [ref=e29]
+            - paragraph [ref=e33]: Диагностика развития
+            - paragraph [ref=e34]: Первичный скрининг, консультации и маршрутизация к нужному специалисту.
+          - generic [ref=e35]:
+            - img [ref=e37]
+            - paragraph [ref=e47]: Индивидуальная поддержка
+            - paragraph [ref=e48]: Подбираем понятный следующий шаг для семьи без перегруза и лишней тревоги.
+          - generic [ref=e49]:
+            - img [ref=e51]
+            - paragraph [ref=e55]: Команда центра
+            - paragraph [ref=e56]: Логопед, дефектолог, нейропсихолог и специалисты ранней помощи.
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - paragraph [ref=e61]: О центре
+              - heading "Помогаем родителям не пропустить важные сигналы развития" [level=2] [ref=e62]
+              - paragraph [ref=e63]: "Мы специализируемся на ранней поддержке детей и на деликатной маршрутизации семьи: от первичного скрининга до очной консультации со специалистом."
+            - img [ref=e65]
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - img [ref=e73]
+              - generic [ref=e75]:
+                - paragraph [ref=e76]: Телефон
+                - paragraph [ref=e77]: +7 (800) 123-45-67
+            - generic [ref=e78]:
+              - img [ref=e80]
+              - generic [ref=e83]:
+                - paragraph [ref=e84]: Адрес
+                - paragraph [ref=e85]: г. Москва, ул. Примерная, 10
+            - generic [ref=e86]:
+              - img [ref=e88]
+              - generic [ref=e91]:
+                - paragraph [ref=e92]: Часы работы
+                - paragraph [ref=e93]: "Пн-Сб: 9:00-20:00"
+        - generic [ref=e94]:
+          - paragraph [ref=e95]:
+            - img [ref=e96]
+            - text: Как это работает
+          - generic [ref=e99]:
+            - generic [ref=e100]:
+              - generic [ref=e101]: "1"
+              - paragraph [ref=e102]: Вы проходите тест и отвечаете на вопросы о развитии ребёнка.
+            - generic [ref=e103]:
+              - generic [ref=e104]: "2"
+              - paragraph [ref=e105]: Система формирует мягкую предварительную рекомендацию без пугающих формулировок.
+            - generic [ref=e106]:
+              - generic [ref=e107]: "3"
+              - paragraph [ref=e108]: Администратор центра видит анкету и может предложить консультацию или диагностику.
+    - generic [ref=e110]:
+      - generic [ref=e111]:
+        - paragraph [ref=e112]: Почему это удобно
+        - heading "Вместо сухой анкеты вы получаете понятную страницу центра с доверием и действием" [level=2] [ref=e113]
+        - paragraph [ref=e114]: Главная страница должна сразу объяснять, кто вы, чем помогаете, как выглядит путь родителя и почему тест безопасно пройти прямо сейчас. Именно под это я и собрал структуру.
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - paragraph [ref=e117]: Доверие
+          - paragraph [ref=e118]: Тёплая подача и спокойный тон без перегруза.
+        - generic [ref=e119]:
+          - paragraph [ref=e120]: Понятность
+          - paragraph [ref=e121]: Сразу видно, зачем нужен тест и что будет потом.
+        - generic [ref=e122]:
+          - paragraph [ref=e123]: Конверсия
+          - paragraph [ref=e124]: CTA на тест и контакт с центром остаются в фокусе.
+    - generic [ref=e126]:
+      - generic [ref=e127]:
+        - paragraph [ref=e128]: Готовы начать?
+        - heading "Пройдите тест и получите аккуратную предварительную рекомендацию уже сейчас" [level=2] [ref=e129]
+        - paragraph [ref=e130]: Если нужно, после теста родителю будет проще поговорить с администратором центра и перейти к следующему шагу без лишних сомнений.
+      - generic [ref=e131]:
+        - button "Пройти тест ребёнка" [ref=e132] [cursor=pointer]:
+          - text: Пройти тест ребёнка
+          - img
+        - button "Подробнее о центре" [ref=e133] [cursor=pointer]
+        - generic [ref=e134]:
+          - img [ref=e135]
+          - paragraph [ref=e138]: Это не диагноз, а бережный предварительный скрининг, который помогает быстрее понять дальнейший маршрут.

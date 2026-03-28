@@ -1,44 +1,117 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { getSubmissionById } from '@/utils/storage';
-import { Heart, AlertTriangle, CheckCircle2, Stethoscope, MessageCircle } from 'lucide-react';
-import { RecommendationLevel } from '@/types/quiz';
+import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
+import {
+  AlertTriangle,
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  Heart,
+  Home,
+  LoaderCircle,
+  MessageCircle,
+  Phone,
+  RefreshCw,
+  Sparkles,
+  Stethoscope,
+} from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { getSubmissionById } from "@/lib/submissions-api";
+import { RecommendationLevel } from "@/types/quiz";
 
-const levelConfig: Record<RecommendationLevel, { icon: React.ReactNode; color: string; bgColor: string }> = {
+const levelConfig: Record<
+  RecommendationLevel,
+  { icon: React.ReactNode; color: string; bgColor: string; accentText: string }
+> = {
   no_risk: {
-    icon: <CheckCircle2 className="w-10 h-10" />,
-    color: 'text-accent',
-    bgColor: 'bg-accent/10',
+    icon: <CheckCircle2 className="h-10 w-10" />,
+    color: "text-emerald-600",
+    bgColor: "bg-emerald-500/15",
+    accentText: "Норма развития по текущим ответам",
   },
   attention: {
-    icon: <Heart className="w-10 h-10" />,
-    color: 'text-[hsl(25,70%,70%)]',
-    bgColor: 'bg-[hsl(25,70%,70%)]/10',
+    icon: <Heart className="h-10 w-10" />,
+    color: "text-amber-600",
+    bgColor: "bg-amber-500/15",
+    accentText: "Есть сигналы для наблюдения",
   },
   consultation: {
-    icon: <MessageCircle className="w-10 h-10" />,
-    color: 'text-secondary',
-    bgColor: 'bg-secondary/10',
+    icon: <MessageCircle className="h-10 w-10" />,
+    color: "text-purple-600",
+    bgColor: "bg-purple-500/15",
+    accentText: "Стоит обсудить со специалистом",
   },
   diagnosis: {
-    icon: <Stethoscope className="w-10 h-10" />,
-    color: 'text-primary',
-    bgColor: 'bg-primary/10',
+    icon: <Stethoscope className="h-10 w-10" />,
+    color: "text-blue-600",
+    bgColor: "bg-blue-500/15",
+    accentText: "Нужна более глубокая диагностика",
   },
 };
 
 export default function ResultScreen() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const submission = id ? getSubmissionById(id) : undefined;
+  const {
+    data: submission,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["submission", id],
+    queryFn: () => getSubmissionById(id!),
+    enabled: Boolean(id),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="inner-page">
+        <div className="result-loading-wrapper">
+          <div className="result-loading-card">
+            <LoaderCircle className="mx-auto h-8 w-8 animate-spin text-primary" />
+            <p className="result-loading-text">Загружаем результат...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="inner-page">
+        <div className="result-loading-wrapper">
+          <div className="result-loading-card">
+            <p className="result-loading-text" style={{ color: "hsl(201, 27%, 19%)" }}>
+              {error instanceof Error ? error.message : "Не удалось загрузить результат."}
+            </p>
+            <div className="result-error-actions">
+              <Button onClick={() => refetch()} variant="outline" className="hero-btn-secondary" size="lg">
+                <RefreshCw className="h-4 w-4" />
+                Повторить
+              </Button>
+              <Button onClick={() => navigate("/")} className="hero-btn-primary" size="lg">
+                <Home className="h-4 w-4" />
+                На главную
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!submission) {
     return (
-      <div className="min-h-[100dvh] flex items-center justify-center p-6">
-        <div className="text-center">
-          <p className="text-muted-foreground mb-4">Результат не найден</p>
-          <Button onClick={() => navigate('/')}>На главную</Button>
+      <div className="inner-page">
+        <div className="result-loading-wrapper">
+          <div className="result-loading-card">
+            <p className="result-loading-text">Результат не найден</p>
+            <Button onClick={() => navigate("/")} className="hero-btn-primary" size="lg">
+              <Home className="h-4 w-4" />
+              На главную
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -46,103 +119,153 @@ export default function ResultScreen() {
 
   const { result } = submission;
   const config = levelConfig[result.level];
+  const percentage = Math.round((result.totalScore / result.maxScore) * 100);
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-background">
-      <div className="flex-1 px-5 py-8 space-y-6">
-        {/* Icon & Title */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-center space-y-4"
-        >
-          <div className={`w-20 h-20 rounded-3xl ${config.bgColor} flex items-center justify-center mx-auto ${config.color}`}>
-            {config.icon}
+    <div className="inner-page">
+      {/* Nav */}
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="inner-nav"
+      >
+        <div className="inner-nav-inner">
+          <button onClick={() => navigate("/")} className="inner-nav-back">
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+          <div className="inner-nav-center">
+            <span className="inner-nav-title">Результат теста</span>
+            <span className="inner-nav-subtitle">Предварительная рекомендация</span>
           </div>
-          <h1
-            className="text-xl font-extrabold text-foreground leading-tight"
-            style={{ fontFamily: 'Nunito, sans-serif' }}
-          >
-            {result.title}
-          </h1>
-        </motion.div>
+          <div style={{ width: 40 }} />
+        </div>
+      </motion.nav>
 
-        {/* Description */}
-        <motion.p
+      {/* Result content */}
+      <div className="result-content">
+        {/* Main result card */}
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-[15px] text-muted-foreground leading-relaxed"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="result-main-card"
         >
-          {result.description}
-        </motion.p>
+          <div className="result-header">
+            <div>
+              <div className="section-chip-new" style={{ marginBottom: 12 }}>
+                <Sparkles className="h-3.5 w-3.5" />
+                {config.accentText}
+              </div>
+              <h1 className="result-title">{result.title}</h1>
+              <p className="result-desc">{result.description}</p>
+            </div>
+            <div className={`result-icon ${config.bgColor} ${config.color}`}>
+              {config.icon}
+            </div>
+          </div>
 
-        {/* Risk factors */}
+          <div className="result-stats-row">
+            <div className="result-stat-card">
+              <p className="result-stat-label">Оценка риска</p>
+              <p className="result-stat-value">{percentage}%</p>
+              <p className="result-stat-hint">
+                Балл {result.totalScore} из {result.maxScore}
+              </p>
+            </div>
+            <div className="result-stat-card">
+              <p className="result-stat-label">Что делать дальше</p>
+              <p className="result-stat-text">
+                Обсудите результат с администратором или специалистом центра для
+                определения дальнейшего маршрута.
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Factors */}
         {result.factors.length > 0 && (
-          <motion.div
+          <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-card rounded-2xl border border-border p-5 space-y-3"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="result-factors"
           >
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-[hsl(25,70%,70%)]" />
-              <h3 className="text-sm font-bold text-foreground">На что обратили внимание</h3>
+            <div className="result-factors-header">
+              <AlertTriangle className="h-4 w-4 text-amber-500" />
+              <h2 className="result-factors-title">На что система обратила внимание</h2>
             </div>
-            <ul className="space-y-2">
-              {result.factors.map((factor, i) => (
-                <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[hsl(25,70%,70%)] flex-shrink-0 mt-1.5" />
-                  {factor}
-                </li>
+            <div className="result-factors-grid">
+              {result.factors.map((factor) => (
+                <div key={factor} className="result-factor-item">
+                  <p>{factor}</p>
+                </div>
               ))}
-            </ul>
-          </motion.div>
+            </div>
+          </motion.section>
         )}
 
-        {/* Why this matters */}
+        {/* Detailed explanation */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="result-explanation"
+        >
+          <h2 className="result-explanation-title">Подробное пояснение</h2>
+          <pre className="result-explanation-text">
+            {result.detailedExplanation}
+          </pre>
+        </motion.section>
+
+        {/* Action buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bg-primary/5 rounded-2xl p-5 space-y-2"
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="result-actions"
         >
-          <h3 className="text-sm font-bold text-foreground">Почему это важно?</h3>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Раннее выявление особенностей развития позволяет вовремя начать поддерживающие занятия.
-            Чем раньше ребёнок получает помощь, тем лучше результаты. В нашем центре работают
-            опытные специалисты, которые помогут разобраться в ситуации и подобрать программу развития.
-          </p>
+          <Button
+            onClick={() => window.open("tel:+78001234567")}
+            className="hero-btn-primary"
+            size="lg"
+          >
+            <Phone className="h-4 w-4" />
+            Записаться на консультацию
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => navigate("/about")}
+            className="hero-btn-secondary"
+            size="lg"
+          >
+            Подробнее о центре
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => navigate("/")}
+            className="hero-btn-secondary"
+            size="lg"
+          >
+            <Home className="h-4 w-4" />
+            На главную
+          </Button>
         </motion.div>
       </div>
 
-      {/* Bottom CTAs */}
-      <div className="sticky bottom-0 px-5 py-4 bg-background/95 backdrop-blur-sm border-t border-border/50 safe-bottom space-y-3">
-        <Button
-          onClick={() => window.open('tel:+78001234567')}
-          className="w-full h-14 text-base font-bold rounded-2xl"
-          size="lg"
-        >
-          Записаться на консультацию
-        </Button>
-        <div className="flex gap-3">
-          <Button
-            variant="outline"
-            onClick={() => navigate('/about')}
-            className="flex-1 h-12 rounded-2xl font-semibold"
-          >
-            О центре
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => navigate('/')}
-            className="flex-1 h-12 rounded-2xl font-semibold"
-          >
-            На главную
-          </Button>
+      {/* Footer */}
+      <footer className="welcome-footer">
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <div className="nav-logo-icon">
+              <Sparkles className="h-4 w-4" />
+            </div>
+            <span className="footer-brand-name">
+              Центр развития особенных детей
+            </span>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }
