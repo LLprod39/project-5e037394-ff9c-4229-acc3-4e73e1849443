@@ -1,301 +1,102 @@
-import { motion } from "framer-motion";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Brain,
-  Clock3,
-  HeartHandshake,
-  MapPin,
-  Phone,
-  Sparkles,
-  Stethoscope,
-  UsersRound,
-} from "lucide-react";
+import { ArrowLeft, ExternalLink, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-
-const team = [
-  {
-    icon: Stethoscope,
-    title: "Педиатр развития",
-    text: "Отслеживает динамику раннего развития и координирует работу всей команды.",
-    gradient: "from-blue-500/20 to-cyan-500/20",
-  },
-  {
-    icon: Brain,
-    title: "Нейропсихолог",
-    text: "Оценивает когнитивные функции, внимание и особенности нервной системы ребёнка.",
-    gradient: "from-purple-500/20 to-pink-500/20",
-  },
-  {
-    icon: UsersRound,
-    title: "Логопед и дефектолог",
-    text: "Работают с речью, коммуникацией и помогают формировать необходимые навыки.",
-    gradient: "from-emerald-500/20 to-teal-500/20",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Специалист ранней помощи",
-    text: "Сопровождает семью от первого обращения до устойчивого результата.",
-    gradient: "from-amber-500/20 to-orange-500/20",
-  },
-];
-
-const directions = [
-  { title: "Логопед и дефектолог", desc: "Речевое развитие и коммуникация" },
-  { title: "Нейропсихологическая диагностика", desc: "Когнитивные функции и внимание" },
-  { title: "Сенсорная интеграция", desc: "Работа с сенсорными особенностями" },
-  { title: "Индивидуальные маршруты", desc: "Персональный план для каждого ребёнка" },
-];
-
-const contacts = [
-  { icon: Phone, title: "Телефон", value: "+7 (800) 123-45-67", href: "tel:+78001234567" },
-  { icon: MapPin, title: "Адрес", value: "г. Москва, ул. Примерная, 10", href: undefined },
-  { icon: Clock3, title: "Часы работы", value: "Пн-Сб: 9:00-20:00", href: undefined },
-];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
+import PublicControls from "@/components/PublicControls";
+import SiteFooter from "@/components/SiteFooter";
+import { useLocale } from "@/lib/i18n";
+import { centerFacts } from "@/lib/public-content";
+import { INSTAGRAM_URL, PAVLODAR_ADDRESS, REVIEWS_URL } from "@/lib/public-config";
 
 export default function AboutPage() {
   const navigate = useNavigate();
+  const { t } = useLocale();
 
   return (
-    <div className="inner-page">
-      {/* Nav */}
-      <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="inner-nav"
-      >
-        <div className="inner-nav-inner">
-          <button onClick={() => navigate(-1)} className="inner-nav-back">
-            <ArrowLeft className="h-4 w-4" />
-          </button>
-          <span className="inner-nav-title">О центре</span>
-          <button onClick={() => navigate("/quiz")} className="inner-nav-cta">
-            Пройти тест
-            <ArrowRight className="h-3.5 w-3.5" />
-          </button>
+    <div className="min-h-screen bg-[linear-gradient(180deg,rgba(255,253,249,1),rgba(247,243,238,1))] dark:bg-[linear-gradient(180deg,rgba(17,22,31,1),rgba(12,18,25,1))]">
+      <header className="border-b border-white/50 bg-white/70 px-4 py-3 backdrop-blur dark:border-white/10 dark:bg-black/20">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
+          <Button variant="ghost" onClick={() => navigate(-1)}>
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            {t({ ru: "Назад", kz: "Артқа" })}
+          </Button>
+          <PublicControls />
         </div>
-      </motion.nav>
+      </header>
 
-      {/* Hero */}
-      <section className="inner-hero">
-        <div className="inner-hero-orbs">
-          <div className="inner-orb inner-orb-1" />
-          <div className="inner-orb inner-orb-2" />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="inner-hero-content"
-        >
-          <div className="section-chip-new">
-            <Sparkles className="h-3.5 w-3.5" />
-            Пространство поддержки
-          </div>
-          <h1 className="inner-hero-title">
-            Центр, где родителю объясняют{" "}
-            <span className="hero-title-accent">спокойно</span>, а ребёнку
-            помогают вовремя
-          </h1>
-          <p className="inner-hero-desc">
-            Мы специализируемся на раннем развитии и диагностике особенностей у
-            детей. Наша задача — не напугать, а дать понятный маршрут: что
-            наблюдать, к кому идти и как выстроить поддержку.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Team */}
-      <motion.section
-        variants={stagger}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="section-container"
-      >
-        <motion.div variants={fadeUp} custom={0} className="section-header">
-          <div className="section-chip-new">
-            <UsersRound className="h-3.5 w-3.5" />
-            Наша команда
-          </div>
-          <h2 className="section-title">Специалисты ранней помощи</h2>
-          <p className="section-desc">
-            Каждый специалист работает в связке с командой, чтобы ребёнок получил
-            максимально эффективную поддержку.
-          </p>
-        </motion.div>
-
-        <div className="services-grid">
-          {team.map((member, i) => {
-            const Icon = member.icon;
-            return (
-              <motion.div
-                key={member.title}
-                variants={fadeUp}
-                custom={i + 1}
-                className="service-card"
-              >
-                <div className={`service-icon-wrap bg-gradient-to-br ${member.gradient}`}>
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h3 className="service-title">{member.title}</h3>
-                <p className="service-text">{member.text}</p>
-              </motion.div>
-            );
-          })}
-        </div>
-      </motion.section>
-
-      {/* Directions */}
-      <section className="directions-section">
-        <div className="how-bg-gradient" />
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="section-container"
-          style={{ position: "relative", zIndex: 1 }}
-        >
-          <motion.div variants={fadeUp} custom={0} className="section-header">
-            <div className="section-chip-new section-chip-light">
-              <Sparkles className="h-3.5 w-3.5" />
-              Направления
+      <main className="px-4 py-8">
+        <div className="mx-auto max-w-6xl space-y-6">
+          <div className="glass-card-strong grid gap-6 p-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div>
+              <p className="section-chip">
+                <MapPin className="h-3.5 w-3.5 text-primary" />
+                {t({
+                  ru: "Центр комплексного развития и коррекции",
+                  kz: "Кешенді даму және түзету орталығы",
+                })}
+              </p>
+              <h1 className="mt-4 text-4xl font-black tracking-tight text-foreground">
+                {t({ ru: "Центр, где с тревогой работают спокойно и по делу", kz: "Мазасыздықпен сабырлы әрі нақты жұмыс істейтін орталық" })}
+              </h1>
+              <p className="mt-4 text-base leading-8 text-muted-foreground">
+                {t({
+                  ru: "Мы готовим семью к очной диагностике без перегруза, помогаем собрать анамнез и заранее увидеть ключевые зоны риска.",
+                  kz: "Біз отбасын бетпе-бет диагностикаға артық жүктемесіз дайындап, анамнезді жинауға және негізгі қауіп аймақтарын алдын ала көруге көмектесеміз.",
+                })}
+              </p>
             </div>
-            <h2 className="section-title section-title-light">
-              Чем мы помогаем
-            </h2>
-          </motion.div>
+            <div className="glass-card overflow-hidden p-3">
+              <img src="/hero-illustration.png" alt="Umay Kids" className="h-full min-h-[18rem] w-full rounded-[1.5rem] object-cover" />
+            </div>
+          </div>
 
-          <div className="directions-grid">
-            {directions.map((dir, i) => (
-              <motion.div
-                key={dir.title}
-                variants={fadeUp}
-                custom={i + 1}
-                className="direction-card"
-              >
-                <div className="direction-dot" />
-                <div>
-                  <p className="direction-title">{dir.title}</p>
-                  <p className="direction-desc">{dir.desc}</p>
-                </div>
-              </motion.div>
+          <div className="grid gap-4 lg:grid-cols-3">
+            {centerFacts.map((fact) => (
+              <div key={fact.ru} className="glass-card p-5 text-sm leading-7 text-foreground">
+                {t(fact)}
+              </div>
             ))}
           </div>
-        </motion.div>
-      </section>
 
-      {/* Contacts */}
-      <motion.section
-        variants={stagger}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="section-container"
-      >
-        <motion.div variants={fadeUp} custom={0} className="section-header">
-          <div className="section-chip-new">
-            <Phone className="h-3.5 w-3.5" />
-            Контакты
-          </div>
-          <h2 className="section-title">Свяжитесь с нами</h2>
-        </motion.div>
-
-        <div className="contacts-grid">
-          {contacts.map((item, i) => {
-            const Icon = item.icon;
-            const Tag = item.href ? "a" : "div";
-            return (
-              <motion.div key={item.title} variants={fadeUp} custom={i + 1}>
-                <Tag
-                  {...(item.href ? { href: item.href } : {})}
-                  className="contact-card"
-                >
-                  <div className="contact-icon">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="contact-label">{item.title}</p>
-                    <p className="contact-value">{item.value}</p>
-                  </div>
-                </Tag>
-              </motion.div>
-            );
-          })}
-        </div>
-      </motion.section>
-
-      {/* CTA */}
-      <section className="about-cta-section">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="about-cta-card"
-        >
-          <h2 className="about-cta-title">Хотите узнать больше?</h2>
-          <p className="about-cta-desc">
-            Пройдите бесплатный онлайн-тест и получите бережную рекомендацию по
-            развитию вашего ребёнка.
-          </p>
-          <div className="about-cta-actions">
-            <Button
-              onClick={() => navigate("/quiz")}
-              className="hero-btn-primary"
-              size="lg"
-            >
-              Пройти тест
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => window.open("tel:+78001234567")}
-              className="hero-btn-secondary"
-              size="lg"
-            >
-              <Phone className="h-4 w-4" />
-              Позвонить
-            </Button>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Footer */}
-      <footer className="welcome-footer">
-        <div className="footer-inner">
-          <div className="footer-brand">
-            <div className="nav-logo-icon">
-              <Sparkles className="h-4 w-4" />
+          <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
+            <div className="glass-card p-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                {t({ ru: "Контакты", kz: "Байланыс" })}
+              </p>
+              <p className="mt-3 text-lg font-bold text-foreground">{PAVLODAR_ADDRESS}</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Button variant="outline" asChild>
+                  <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
+                    Instagram
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+                <Button variant="outline" asChild>
+                  <a href={REVIEWS_URL} target="_blank" rel="noreferrer">
+                    2GIS
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
             </div>
-            <span className="footer-brand-name">
-              Центр развития особенных детей
-            </span>
+            <div className="glass-card p-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                {t({ ru: "Следующий шаг", kz: "Келесі қадам" })}
+              </p>
+              <p className="mt-3 text-base leading-8 text-foreground">
+                {t({
+                  ru: "Пройдите тест, чтобы специалист заранее увидел вашу карту случая и не тратил первую встречу на сбор базовой информации.",
+                  kz: "Маман жағдай картасын алдын ала көріп, алғашқы кездесуді тек бастапқы мәлімет жинауға жұмсамауы үшін тесттен өтіңіз.",
+                })}
+              </p>
+              <Button className="mt-5" onClick={() => navigate("/quiz")}>
+                {t({ ru: "Перейти к тесту", kz: "Тестке өту" })}
+              </Button>
+            </div>
           </div>
-          <p className="footer-copy">
-            © {new Date().getFullYear()} Центр развития. Бережная поддержка
-            развития вашего ребёнка.
-          </p>
         </div>
-      </footer>
+      </main>
+
+      <SiteFooter />
     </div>
   );
 }

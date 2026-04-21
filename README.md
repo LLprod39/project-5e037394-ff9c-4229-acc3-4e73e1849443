@@ -43,6 +43,5 @@ npm start
 ## Проверка
 
 ```bash
-npm test
 npm run build
 ```
