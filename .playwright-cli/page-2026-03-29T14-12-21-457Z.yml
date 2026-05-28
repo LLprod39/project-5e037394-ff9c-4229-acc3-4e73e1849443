@@ -1,0 +1,76 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - button [ref=e6] [cursor=pointer]:
+          - img [ref=e7]
+        - generic [ref=e9]:
+          - paragraph [ref=e10]: Предварительный результат
+          - paragraph [ref=e11]: Диагностика
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - button "RU" [ref=e14] [cursor=pointer]
+            - button "KZ" [ref=e15] [cursor=pointer]
+          - button "Включить темную тему" [ref=e17] [cursor=pointer]:
+            - img [ref=e18]
+    - main [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Нужна очная диагностика
+          - generic [ref=e24]:
+            - heading "Выявлены маркеры, требующие обязательной очной оценки" [level=1] [ref=e25]
+            - paragraph [ref=e26]: Тест показал сочетание признаков функциональной незрелости. Диагностика поможет подтвердить первопричину и выбрать правильный маршрут помощи.
+          - generic [ref=e27]:
+            - paragraph [ref=e28]: Что важно знать
+            - paragraph [ref=e29]: Тест показывает симптомы и зоны риска, но не заменяет очную диагностику. На встрече в Umay Kids специалист проверит первопричину через нейропсихологические пробы и внутренний протокол.
+          - generic [ref=e30]:
+            - generic [ref=e31]:
+              - paragraph [ref=e32]: Беременность и роды
+              - paragraph [ref=e33]: История беременности и родов показывает выраженную нагрузку на нервную систему. Эти данные важно разобрать очно, пока карта случая свежая.
+            - generic [ref=e34]:
+              - paragraph [ref=e35]: Физическое и моторное развитие
+              - paragraph [ref=e36]: Моторный блок показывает значимые зоны дефицита. Их важно не просто заметить, а очно проверить через нейропсихологические пробы.
+            - generic [ref=e37]:
+              - paragraph [ref=e38]: Речь и коммуникация
+              - paragraph [ref=e39]: Коммуникативный блок показывает маркеры, которые требуют очной диагностики. Здесь особенно важно не ограничиваться онлайн-тестом.
+          - generic [ref=e41]:
+            - img [ref=e42]
+            - paragraph [ref=e44]: Система отметила красные флаги, поэтому очную диагностику лучше не откладывать.
+        - complementary [ref=e45]:
+          - generic [ref=e46]:
+            - paragraph [ref=e47]: Индивидуальная бронь
+            - paragraph [ref=e48]: 24 000 KZT
+            - paragraph [ref=e49]: 30 000 KZT
+            - paragraph [ref=e50]: "Ваши результаты актуальны и забронированы за вашим профилем в течение 3 дней. При записи в этот срок стоимость диагностики составит:"
+            - paragraph [ref=e51]: 01.04.2026, 18:17:14
+            - button "Записаться в WhatsApp и закрепить скидку" [ref=e52] [cursor=pointer]:
+              - img
+              - text: Записаться в WhatsApp и закрепить скидку
+          - generic [ref=e53]:
+            - paragraph [ref=e54]: Пока ждете ответ
+            - paragraph [ref=e55]: Можно перейти в Instagram Umay Kids и посмотреть полезные материалы для родителей.
+            - link "Instagram" [ref=e56] [cursor=pointer]:
+              - /url: https://www.instagram.com/umay_kids_pvl?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==
+              - text: Instagram
+              - img
+    - contentinfo [ref=e57]:
+      - generic [ref=e58]:
+        - generic [ref=e59]:
+          - paragraph [ref=e60]: Umay Kids
+          - paragraph [ref=e61]: Павлодар, Толстого 57, 2 этаж, офис 201, вход с цокольного этажа
+        - generic [ref=e62]:
+          - link "2GIS" [ref=e63] [cursor=pointer]:
+            - /url: https://2gis.kz/pavlodar/geo/70000001104382164
+            - img [ref=e64]
+            - text: 2GIS
+            - img [ref=e67]
+          - link "Instagram" [ref=e71] [cursor=pointer]:
+            - /url: https://www.instagram.com/umay_kids_pvl?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==
+            - img [ref=e72]
+            - text: Instagram
+            - img [ref=e75]
+        - link "Политика конфиденциальности" [ref=e79] [cursor=pointer]:
+          - /url: /privacy

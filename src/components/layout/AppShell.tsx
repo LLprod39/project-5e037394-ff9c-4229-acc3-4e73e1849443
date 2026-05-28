@@ -5,26 +5,30 @@ interface AppShellProps {
   children: ReactNode;
   className?: string;
   contentClassName?: string;
-  size?: "compact" | "wide";
+  size?: "compact" | "wide" | "narrow";
+  plain?: boolean;
 }
+
+const sizeMap = {
+  narrow:  "max-w-2xl",
+  compact: "max-w-3xl lg:max-w-5xl",
+  wide:    "max-w-6xl 2xl:max-w-[80rem]",
+} as const;
 
 export default function AppShell({
   children,
   className,
   contentClassName,
   size = "compact",
+  plain = false,
 }: AppShellProps) {
   return (
-    <div className={cn("app-shell", className)}>
-      <div className="ambient-orb left-[-5rem] top-[-3rem] h-52 w-52 bg-primary/35 lg:left-[-2rem] lg:top-8 lg:h-72 lg:w-72" />
-      <div className="ambient-orb right-[-4rem] top-24 h-48 w-48 bg-secondary/35 lg:right-8 lg:top-16 lg:h-64 lg:w-64" />
-      <div className="ambient-orb bottom-[-4rem] left-1/2 h-64 w-64 -translate-x-1/2 bg-accent/30 lg:bottom-0 lg:h-80 lg:w-80" />
-
+    <div className={cn("relative min-h-screen", plain ? "bg-page-plain" : "bg-page", className)}>
       <div
         className={cn(
-          "content-shell px-4 pb-6 pt-4 sm:px-6 sm:pb-8 lg:px-8 lg:pt-6 xl:px-10 xl:pb-10",
-          size === "compact" ? "max-w-[34rem] lg:max-w-6xl" : "max-w-7xl 2xl:max-w-[88rem]",
-          contentClassName
+          "relative mx-auto w-full px-4 pb-10 pt-4 sm:px-6 lg:px-8 lg:pb-14 lg:pt-6",
+          sizeMap[size],
+          contentClassName,
         )}
       >
         {children}

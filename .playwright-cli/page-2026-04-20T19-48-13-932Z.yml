@@ -1,0 +1,96 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - button "Umay Kids" [ref=e6] [cursor=pointer]:
+          - img [ref=e8]
+          - text: Umay Kids
+        - generic [ref=e10]:
+          - button "О центре" [ref=e11] [cursor=pointer]
+          - generic [ref=e12]:
+            - generic [ref=e13]:
+              - button "RU" [ref=e14] [cursor=pointer]
+              - button "KZ" [ref=e15] [cursor=pointer]
+            - button "Включить темную тему" [ref=e17] [cursor=pointer]:
+              - img [ref=e18]
+    - main [ref=e20]:
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - img [ref=e25]
+          - text: Подготовка к очному приему
+        - generic [ref=e28]:
+          - heading "Проверьте развитие вашего ребенка за 5 минут" [level=1] [ref=e29]
+          - paragraph [ref=e30]: Безопасный и конфиденциальный тест-анамнез. Получите предварительное заключение о соответствии нормам развития без официального диагноза.
+        - button "Начать тест бесплатно" [ref=e32] [cursor=pointer]:
+          - text: Начать тест бесплатно
+          - img
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - paragraph [ref=e36]: Как это работает
+          - heading "Три спокойных шага" [level=2] [ref=e37]
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - paragraph [ref=e40]: "01"
+            - heading "Отвечаете на вопросы" [level=3] [ref=e41]
+            - paragraph [ref=e42]: Про роды, моторное развитие и текущие навыки ребенка.
+          - generic [ref=e43]:
+            - paragraph [ref=e44]: "02"
+            - heading "Получаете результат" [level=3] [ref=e45]
+            - paragraph [ref=e46]: Система анализирует ответы и собирает предварительный профиль.
+          - generic [ref=e47]:
+            - paragraph [ref=e48]: "03"
+            - heading "Приходите на прием" [level=3] [ref=e49]
+            - paragraph [ref=e50]: Специалист Umay Kids уже видит карту случая и может работать точнее.
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - paragraph [ref=e54]:
+            - img [ref=e55]
+            - text: О центре
+          - generic [ref=e58]:
+            - generic [ref=e59]: Центр нейрокоррекции Umay Kids, Павлодар
+            - generic [ref=e60]: Запуск речи, коррекция поведения и развитие нейронных связей
+            - generic [ref=e61]: Научный подход и профессиональные диагностические протоколы
+        - generic [ref=e62]:
+          - generic [ref=e63]:
+            - generic [ref=e64]:
+              - paragraph [ref=e65]: Частые вопросы
+              - paragraph [ref=e66]: Коротко отвечаем на то, что больше всего волнует родителей.
+            - img [ref=e67]
+          - generic [ref=e70]:
+            - heading "Это заменяет прием врача?" [level=3] [ref=e72]:
+              - button "Это заменяет прием врача?" [ref=e73] [cursor=pointer]:
+                - text: Это заменяет прием врача?
+                - img [ref=e74]
+            - heading "Сколько времени это займет?" [level=3] [ref=e77]:
+              - button "Сколько времени это займет?" [ref=e78] [cursor=pointer]:
+                - text: Сколько времени это займет?
+                - img [ref=e79]
+            - heading "Безопасно ли оставлять данные?" [level=3] [ref=e82]:
+              - button "Безопасно ли оставлять данные?" [ref=e83] [cursor=pointer]:
+                - text: Безопасно ли оставлять данные?
+                - img [ref=e84]
+            - heading "Когда нужен очный прием?" [level=3] [ref=e87]:
+              - button "Когда нужен очный прием?" [ref=e88] [cursor=pointer]:
+                - text: Когда нужен очный прием?
+                - img [ref=e89]
+    - contentinfo [ref=e91]:
+      - generic [ref=e92]:
+        - generic [ref=e93]:
+          - paragraph [ref=e94]: Umay Kids
+          - paragraph [ref=e95]: Павлодар, Толстого 57, 2 этаж, офис 201, вход с цокольного этажа
+        - generic [ref=e96]:
+          - link "2GIS" [ref=e97] [cursor=pointer]:
+            - /url: https://2gis.kz/pavlodar/geo/70000001104382164
+            - img [ref=e98]
+            - text: 2GIS
+            - img [ref=e101]
+          - link "Instagram" [ref=e105] [cursor=pointer]:
+            - /url: https://www.instagram.com/umay_kids_pvl?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==
+            - img [ref=e106]
+            - text: Instagram
+            - img [ref=e109]
+        - link "Политика конфиденциальности" [ref=e113] [cursor=pointer]:
+          - /url: /privacy

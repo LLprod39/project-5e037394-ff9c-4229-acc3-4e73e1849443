@@ -1,0 +1,21 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - button "На сайт" [ref=e6] [cursor=pointer]:
+      - img [ref=e7]
+      - text: На сайт
+    - generic [ref=e9]:
+      - img [ref=e11]
+      - generic [ref=e15]:
+        - heading "Вход в админку" [level=1] [ref=e16]
+        - paragraph [ref=e17]: Защищенный доступ к анкетам, статусам клиентов и печатным картам приема.
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - text: Логин
+        - textbox "Логин" [ref=e20]
+      - generic [ref=e21]:
+        - text: Пароль
+        - textbox "Пароль" [ref=e22]
+      - button "Войти" [ref=e23] [cursor=pointer]
